@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Painel de Vendas</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f5f5f5;
+    }
+
+    header {
+        background: #111;
+        color: #fff;
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    h1 {
+        margin: 0;
+        font-size: 22px;
+    }
+
+    .container {
+        max-width: 1100px;
+        margin: 20px auto;
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+    }
+
+    table thead {
+        background: #222;
+        color: #fff;
+    }
+
+    table th, table td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    tr:hover {
+        background: #f1f1f1;
+    }
+
+    .status {
+        padding: 4px 8px;
+        border-radius: 6px;
+        font-weight: bold;
+        font-size: 13px;
+    }
+
+    .pendente { background: orange; color: #fff; }
+    .pago { background: green; color: #fff; }
+    .cancelado { background: red; color: #fff; }
+
+    #buscar {
+        width: 100%;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        margin-bottom: 10px;
+    }
+</style>
+
+</head>
+<body>
+
+<header>
+    <h1>📊 Painel de Vendas</h1>
+    <button onclick="location.href='index.html'" style="padding:10px 18px;border:none;border-radius:8px;background:#fff;color:#000;cursor:pointer">
+        Voltar
+    </button>
+</header>
+
+<div class="container">
+
+    <input type="text" id="buscar" placeholder="Buscar por cliente, telefone, status..." oninput="filtrarTabela()">
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Cliente</th>
+                <th>Telefone</th>
+                <th>Data</th>
+                <th>Total</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody id="tabelaVendas">
+            <tr><td colspan="6" style="text-align:center;padding:15px;">Carregando...</td></tr>
+        </tbody>
+    </table>
+
+</div>
+
+<script>
+const API = "https://catalago-online.vercel.app/api/vendas";
+
+async function carregarVendas() {
+    try {
+        const res = await fetch(API);
+        const vendas = await res.json();
+
+        const corpo = document.getElementById("tabelaVendas");
+
+        if (!vendas.length) {
+            corpo.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:15px;">Nenhuma venda cadastrada</td></tr>`;
+            return;
+        }
+
+        corpo.innerHTML = vendas.map(v => `
+            <tr>
+                <td>${v.id}</td>
+                <td>${v.cliente_nome || '-'}</td>
+                <td>${v.cliente_telefone || '-'}</td>
+                <td>${new Date(v.data_venda).toLocaleString('pt-BR')}</td>
+                <td>R$ ${Number(v.valor_total).toFixed(2).replace(".", ",")}</td>
+                <td>
+                    <span class="status ${v.status}">
+                        ${v.status.toUpperCase()}
+                    </span>
+                </td>
+            </tr>
+        `).join("");
+
+    } catch (error) {
+        document.getElementById("tabelaVendas").innerHTML =
+            `<tr><td colspan="6" style="color:red;text-align:center;padding:15px;">Erro ao carregar vendas</td></tr>`;
+    }
+}
+
+function filtrarTabela() {
+    const termo = document.getElementById("buscar").value.toLowerCase();
+    const linhas = document.querySelectorAll("#tabelaVendas tr");
+
+    linhas.forEach(linha => {
+        const texto = linha.innerText.toLowerCase();
+        linha.style.display = texto.includes(termo) ? "" : "none";
+    });
+}
+
+carregarVendas();
+</script>
+
+</body>
+</html>
