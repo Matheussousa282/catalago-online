@@ -990,6 +990,65 @@ footer {
   display: block;
 }
 
+/* ==========================
+   MOBILE – HEADER CENTRALIZADO
+   ========================== */
+@media (max-width: 600px) {
+
+    /* Header vira coluna */
+    header.topo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        padding: 18px 12px;
+    }
+
+    /* Logo ocupa o topo */
+    .logo-topo {
+        width: 100%;
+        max-width: 260px;
+        height: auto;
+        border-radius: 28px;
+    }
+
+    /* Bloco abaixo da logo */
+    .linha-baixo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 6px;
+    }
+
+    /* Nome centralizado */
+    .nome-loja {
+        text-align: center;
+        font-size: 20px;
+    }
+
+    /* Frase centralizada */
+    .sub-frase {
+        display: block;
+        text-align: center;
+        font-size: 14px;
+        color: #444;
+    }
+
+    /* Barra de pesquisa central */
+    .campo-pesquisa {
+        width: 100%;
+        max-width: 420px;
+        padding: 14px 18px;
+        border-radius: 30px;
+        text-align: center;
+    }
+
+    .campo-pesquisa::placeholder {
+        text-align: center;
+    }
+}
 
 </style>
 </head>
