@@ -979,63 +979,90 @@ footer {
 }
 
 /* ==================================================
-   MOBILE — LOGO NO TAMANHO REAL (1080x1200)
+   MOBILE — TEXTO SOBRE A LOGO (OVERLAY CENTRALIZADO)
    ================================================== */
 @media (max-width: 600px) {
 
+    /* Header vira container da imagem */
     header.topo {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        position: relative;
         padding: 0;
-        background: #000; /* fundo caso sobre espaço */
+        background: #000;
+        overflow: hidden;
     }
 
-    /* LOGO — imagem manda no layout */
+    /* Logo ocupa o topo, SEM cortar */
     .logo-topo {
         width: 100%;
-        height: auto;              /* 🔥 ESSENCIAL */
-        max-height: 65vh;          /* controla sem cortar */
-        object-fit: contain;       /* 🔥 NÃO corta, NÃO divide */
+        height: auto;
+        max-height: 65vh;
+        object-fit: contain;
         display: block;
-        border-radius: 0;
     }
 
-    /* Conteúdo vem DEPOIS da imagem */
+    /* Camada escura suave (overlay) */
+    header.topo::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45); /* controla transparência */
+        z-index: 1;
+    }
+
+    /* Conteúdo SOBRE a imagem */
     .linha-baixo {
-        width: 100%;
-        padding: 12px 14px 16px;
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 6px;
-        background: #fff;          /* separa da imagem */
+        justify-content: center;
+
+        gap: 10px;
+        padding: 0 16px;
         text-align: center;
     }
 
+    /* Nome */
     .nome-loja {
-        font-size: 20px;
+        font-size: 22px;
         font-weight: 800;
-        color: #000;
+        color: #fff;
+        text-shadow: 0 3px 10px rgba(0,0,0,0.8);
         margin: 0;
     }
 
+    /* Frase */
     .sub-frase {
         font-size: 14px;
-        color: #444;
+        color: #f1f1f1;
+        text-shadow: 0 2px 8px rgba(0,0,0,0.7);
         margin: 0;
     }
 
+    /* Barra de pesquisa com fundo translúcido */
     .campo-pesquisa {
         width: 100%;
         max-width: 420px;
-        padding: 14px;
+        padding: 14px 18px;
         border-radius: 30px;
-        border: 1px solid #ccc;
-        text-align: center;
+
+        background: rgba(255,255,255,0.92);
+        border: none;
         font-size: 15px;
+        text-align: center;
+
+        box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+    }
+
+    .campo-pesquisa::placeholder {
+        color: #666;
+        text-align: center;
     }
 }
+
 
 </style>
 </head>
