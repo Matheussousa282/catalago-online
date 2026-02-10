@@ -991,97 +991,57 @@ footer {
 }
 
 /* ==================================================
-   MOBILE — LOGO COMO FUNDO + TEXTO SOBRE A IMAGEM
+   MOBILE — LOGO NO TAMANHO REAL (SEM DUPLICAR)
    ================================================== */
 @media (max-width: 600px) {
 
-    /* Header vira container de imagem */
+    /* Header se adapta à logo */
     header.topo {
-    position: relative;
-    padding: 0;
-    height: 42vh;          /* usa % da tela */
-    max-height: 320px;     /* limite máximo */
-    overflow: hidden;
-}
-    /* Logo vira BACKGROUND visual */
-    .logo-topo {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;          /* ocupa tudo */
-        z-index: 1;
-        border-radius: 0;
+        position: relative;
+        padding: 0;
+        display: flex;
+        align-items: flex-end;   /* conteúdo no final */
+        justify-content: center;
+        overflow: hidden;
+        background: #000;        /* fundo caso sobre espaço */
     }
 
-    /* Camada escura pra leitura */
+    /* LOGO — tamanho real, SEM esticar */
+    .logo-topo {
+        position: relative;
+        width: 100%;
+        height: auto;            /* 🔥 CHAVE DO PROBLEMA */
+        max-height: 45vh;        /* limita no mobile */
+        object-fit: contain;     /* 🔥 NÃO corta, NÃO duplica */
+        display: block;
+    }
+
+    /* Camada escura suave em cima da logo */
     header.topo::after {
         content: "";
         position: absolute;
         inset: 0;
         background: linear-gradient(
-            to bottom,
-            rgba(0,0,0,0.45),
-            rgba(0,0,0,0.65)
+            to top,
+            rgba(0,0,0,0.65),
+            rgba(0,0,0,0.15)
         );
-        z-index: 2;
+        pointer-events: none;
     }
 
+    /* Conteúdo flutuando sobre a imagem */
     .linha-baixo {
-    position: absolute;
-    bottom: 18px;            /* ⬇️ fica no final da imagem */
-    left: 0;
-    right: 0;
-    z-index: 3;
+        position: absolute;
+        bottom: 14px;
+        left: 0;
+        right: 0;
+        z-index: 2;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap:
 
-    width: 100%;
-    padding: 0 14px;
-    text-align: center;
-}
-
-    /* Esconde logo duplicada */
-    .linha-baixo img {
-        display: none;
-    }
-
-    /* Nome da loja */
-    .nome-loja {
-        color: #fff;
-        font-size: 22px;
-        font-weight: 800;
-        text-shadow: 0 3px 8px rgba(0,0,0,0.7);
-    }
-
-    /* Frase */
-    .sub-frase {
-        color: #f1f1f1;
-        font-size: 14px;
-        text-shadow: 0 2px 6px rgba(0,0,0,0.6);
-    }
-
-    /* Campo de pesquisa flutuante */
-    .campo-pesquisa {
-        margin-top: 10px;
-        width: 100%;
-        max-width: 420px;
-        padding: 14px 18px;
-        border-radius: 30px;
-        border: none;
-        font-size: 15px;
-        text-align: center;
-        box-shadow: 0 8px 25px rgba(0,0,0,0.35);
-    }
-
-    .campo-pesquisa::placeholder {
-        text-align: center;
-        color: #777;
-    }
-}
 
 </style>
 </head>
