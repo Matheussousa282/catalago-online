@@ -997,15 +997,12 @@ footer {
 
     /* Header vira container de imagem */
     header.topo {
-        position: relative;
-        padding: 0;
-        height: 260px;              /* altura do banner */
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
+    position: relative;
+    padding: 0;
+    height: 42vh;          /* usa % da tela */
+    max-height: 320px;     /* limite máximo */
+    overflow: hidden;
+}
     /* Logo vira BACKGROUND visual */
     .logo-topo {
         position: absolute;
@@ -1030,18 +1027,22 @@ footer {
         z-index: 2;
     }
 
-    /* Conteúdo em cima da imagem */
     .linha-baixo {
-        position: relative;
-        z-index: 3;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-        width: 100%;
-        padding: 0 14px;
-        text-align: center;
-    }
+    position: absolute;
+    bottom: 18px;            /* ⬇️ fica no final da imagem */
+    left: 0;
+    right: 0;
+    z-index: 3;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+
+    width: 100%;
+    padding: 0 14px;
+    text-align: center;
+}
 
     /* Esconde logo duplicada */
     .linha-baixo img {
