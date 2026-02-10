@@ -990,63 +990,95 @@ footer {
   display: block;
 }
 
-/* ==========================
-   MOBILE – HEADER CENTRALIZADO
-   ========================== */
+/* ==================================================
+   MOBILE — LOGO COMO FUNDO + TEXTO SOBRE A IMAGEM
+   ================================================== */
 @media (max-width: 600px) {
 
-    /* Header vira coluna */
+    /* Header vira container de imagem */
     header.topo {
+        position: relative;
+        padding: 0;
+        height: 260px;              /* altura do banner */
+        overflow: hidden;
         display: flex;
-        flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 12px;
-        padding: 18px 12px;
     }
 
-    /* Logo ocupa o topo */
+    /* Logo vira BACKGROUND visual */
     .logo-topo {
+        position: absolute;
+        inset: 0;
         width: 100%;
-        max-width: 260px;
-        height: auto;
-        border-radius: 28px;
+        height: 100%;
+        object-fit: cover;          /* ocupa tudo */
+        z-index: 1;
+        border-radius: 0;
     }
 
-    /* Bloco abaixo da logo */
+    /* Camada escura pra leitura */
+    header.topo::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            to bottom,
+            rgba(0,0,0,0.45),
+            rgba(0,0,0,0.65)
+        );
+        z-index: 2;
+    }
+
+    /* Conteúdo em cima da imagem */
     .linha-baixo {
+        position: relative;
+        z-index: 3;
         display: flex;
         flex-direction: column;
         align-items: center;
+        gap: 8px;
         width: 100%;
-        gap: 6px;
+        padding: 0 14px;
+        text-align: center;
     }
 
-    /* Nome centralizado */
+    /* Esconde logo duplicada */
+    .linha-baixo img {
+        display: none;
+    }
+
+    /* Nome da loja */
     .nome-loja {
-        text-align: center;
-        font-size: 20px;
+        color: #fff;
+        font-size: 22px;
+        font-weight: 800;
+        text-shadow: 0 3px 8px rgba(0,0,0,0.7);
     }
 
-    /* Frase centralizada */
+    /* Frase */
     .sub-frase {
-        display: block;
-        text-align: center;
+        color: #f1f1f1;
         font-size: 14px;
-        color: #444;
+        text-shadow: 0 2px 6px rgba(0,0,0,0.6);
     }
 
-    /* Barra de pesquisa central */
+    /* Campo de pesquisa flutuante */
     .campo-pesquisa {
+        margin-top: 10px;
         width: 100%;
         max-width: 420px;
         padding: 14px 18px;
         border-radius: 30px;
+        border: none;
+        font-size: 15px;
         text-align: center;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.35);
     }
 
     .campo-pesquisa::placeholder {
         text-align: center;
+        color: #777;
     }
 }
 
