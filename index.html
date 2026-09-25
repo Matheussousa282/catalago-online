@@ -1064,15 +1064,18 @@ footer {
 }
 
 .contato-topo{
-    margin-top:6px;
-    font-size:14px;
+    margin-top: 6px;
+    font-size: 14px;
     color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
 .contato-topo a{
-    color:#ffffff;
-    font-weight:600;
-    text-decoration:none;
+    color: #ffffff;
+    font-weight: 600;
+    text-decoration: none;
 }
 .contato-topo a:hover{
     text-decoration:underline;
@@ -1093,9 +1096,14 @@ footer {
         <input type="text" id="q" class="campo-pesquisa" placeholder="Pesquisar...">
 
 <div class="contato-topo">
-    Contacto:
+    <div>Contacto:</div>
+
     <a href="https://wa.me/244942441692" target="_blank">
         +244 942 441 692
+    </a>
+
+    <a href="https://wa.me/244954402975" target="_blank">
+        +244 954 402 975
     </a>
 </div>
 
@@ -2139,7 +2147,7 @@ document.querySelectorAll("input[name='formaPagamento']").forEach(radio => {
       dadosPagamento.innerHTML = `
         📲 <strong>Pagamento por Expresso</strong><br>
         Nome: Nivea Maria Silva Cruz de Melo<br>
-        Nº: 841705796<br><br>
+        Nº: 941705796<br><br>
         📌 Envie o comprovante no WhatsApp após o pagamento.
       `;
     }
